@@ -49,7 +49,7 @@
 </head>
 
 <body>
-<h2>Debugging facebook app</h2>
+<h2>Debugging facebook app </h2>
 
 <h1 id="fb-welcome"></h1>
 </body>
