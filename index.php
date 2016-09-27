@@ -49,7 +49,7 @@
 </head>
 
 <body>
-<h2>Hello, We are developping this website. Thank to visited and see you soon</h2>
+<h2>Just photo</h2>
 
 <h1 id="fb-welcome"></h1>
 </body>
