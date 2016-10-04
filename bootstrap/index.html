@@ -1,0 +1,235 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Antztek</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+	<link href="bootstrap/css/customize.css" rel="stylesheet">
+	<script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script type="text/javascript" src="bootstrap/js/customize.js"></script>
+        
+
+
+
+	<script type="text/javascript">
+        //--------------Browser history ------------------------
+        console.log( window.location.href ); 
+
+        //--------------Google map -----------------------------
+        var myCenter=new google.maps.LatLng(20.960078,105.764282);
+        function initialize()
+        {
+           // console.log("google event ...");
+            var mapProp = {
+              center: myCenter,
+              zoom:15,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+              };
+
+            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+            var marker = new google.maps.Marker({
+              position: myCenter,
+              title:'Click to zoom'
+              });
+
+            marker.setMap(map);
+
+            // Zoom to 9 when clicking on marker
+            google.maps.event.addListener(marker,'click',function() {
+              map.setZoom(9);
+              map.setCenter(marker.getPosition());
+              });
+                 
+            google.maps.event.addListener(map,'center_changed',function() {
+            // 3 seconds after the center of the map has changed, pan back to the marker
+              window.setTimeout(function() {
+                map.panTo(marker.getPosition());
+              },3000);
+              });
+        }
+        //-----------------------Document tab
+        $(document).ready(function() {
+            $('a.tab').click(function(){
+                $('.active').removeClass('active');
+                $(this).addClass('active');
+                // $('.content').fadeOut();
+                $('.content').css("display","none");
+                var content_show = $(this).attr('title');
+                if(content_show=="Products" || content_show=="Contacts" ){
+                    $('#'+ content_show).slideDown(688);
+                }else{
+                    $('#'+ content_show).fadeIn(688);
+                }
+                if(content_show == "Contacts")
+                    console.log("contacts tab");
+                initialize();
+                history.pushState({page: this.href}, '', window.location.href+"/"+content_show);
+                    //google.maps.event.addDomListener(window, 'load', initialize);
+            });
+        });
+     </script>
+</head>
+<body style="margin-top: 0px;">
+	<nav class="navbar transparent navbar-default navbar-fixed-top">
+		<div class="container">
+		<div class="navbar-header">
+		  <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+		    <span class="sr-only"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		   <!-- <a class="navbar-brand" href="#">Brand</a> -->
+		  <img id="logo" src="images/logo.png" style="height: 58px;">
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar">
+			<ul class="nav navbar-nav navbar-right">
+		        <li><a href="#" title='About' class="active tab">About Us</a></li>
+		        <li><a href="#" title='Products' class="tab">Products stack</a></li>
+		        <!-- <li><a href="#" title='Solution' class="tab">Solution</a></li> -->
+                <li><a href="#" title='Contacts' class="tab">Contacts</a></li>
+		        <li style="display:none"><a href="http://www.freepik.com/free-photos-vectors/infographic">Infographic vector designed by Freepik</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+		</div>
+	</nav>
+	<div class="container">
+      <!-- Main component for a primary marketing message or call to action -->
+      	<div id="About" class="row content">
+            <div class="col-md-1 col-lg-4 red left_colum" >
+                <div class="row tree">
+                    <img src="images/tree.jpg" alt="tree picture">
+                </div>
+                <div class="row tree green">
+                    <h4 id="team-img">Team members</h4>
+                    <ul id="cofounder">
+                        <li><img src="images/minhld.png" alt="startup co-founder" title="Minh"></li>
+                        <li><img src="images/tuanvd.png" alt="startup co-founder" title="Tuan"></li>
+                        <li><img src="images/anhnt.png" alt="startup co-founder" title="The Anh"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-11 col-lg-8">
+                <div id="profile">
+                    <h2>We Are Comming From The Same Vision <br> "Create Values For Communities"</h2>
+                    <br>
+                    <h3>Bring IOT, Software, Technologies to the life</h3>
+                    <p id="made-by"> Status: <span style="color:#177BA5">Expand Team, Market Analytic-Survey, Research and Development </span></p>
+                    <p class="lead"> We are startup with a strong target goal as bring the good values for <strong> Community, innovation the life, connecting people</strong> . Let do it together.</p>
+                    <p class="leadTime"> <i class="fa fa-child"></i><i class="fa fa-child"></i><i class="fa fa-child"></i> <i class="fa fa-lightbulb-o fa-2x"></i> <i class="fa fa-child"></i><i class="fa fa-child"></i><i class="fa fa-child"></i>  support@antztek.com</p>
+                </div>
+            </div>   
+        </div>
+        <div class="clear"></div>
+        <div id="Products" class="row content">
+            <div class="col-md-1 col-lg-3" id="iotView" >
+                <div class="row color-gray">
+                    <h1>IOT</h1>
+                </div>
+                <div class="row">
+                    <img src="images/iotOverview.jpg" alt="startup co-founder" title="Minh">
+                </div>
+            </div>
+            <div class="col-md-11 col-lg-6">
+                <div id="menu2">
+                    <div class="row">
+                        <div class="col-sm-1 col-md-1 col-lg-6" style="padding-right: 0px;">
+                            <h3 id="menu2-h3">E-Commerce Multimedia</h3>
+                        </div>
+                        <div  class="col-sm-1 col-md-1 col-lg-3">
+                            <img src="images/bigData.jpg" alt="startup co-founder" title="Minh">
+                        </div>
+                        <div class="col-sm-1 col-md-1 col-lg-3" style="padding-left: 8px;">
+                            <h3 id="menu2-h32" >CRM <br> HRM</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="social">
+                            <h3> Social Network </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            <div class="col-md-1 col-lg-3">
+                <div class="row blue" style="padding-left: 0px; margin-right:-44px;">
+                    <h2 id="menu2-AR"> Analytic & <br> Reporting</h2>           
+                </div>
+                <div class="row" style="margin-top: 15px; margin-right: -44px;">
+                    <div class="col-md-1 col-lg-6 ligh-gray">
+                        <h3 id="menu2-MA"> Mobile App</h3>
+                    </div>
+                    <div class="col-md-1 col-lg-6">
+                        <h3 id="menu2-WS" >Web <br> Service </h3>
+                    </div>
+                </div>
+                <div class="row" style="margin-right: -45px;">
+                    <div class="col-md-1 col-lg-12" id="div_EO">
+                        <h2 id="menu2-EO">Electrical OEM</h2>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <div class="clear"></div>
+        <div id="Solution" class="row content">
+            <div class="col-md-1 col-lg-4 red left_colum" >
+                <div class="row tree">
+                    <img src="images/tree.jpg" alt="tree picture">
+
+                </div>
+                <div class="row tree green">
+                    <h4 id="team-img">Team members</h4>
+                    <ul id="">
+                        <li><img src="images/minhld.png" alt="startup co-founder" title="Minh"></li>
+                        <li><img src="images/tuanvd.png" alt="startup co-founder" title="Tuan"></li>
+                        <li><img src="images/anhnt.png" alt="startup co-founder" title="The Anh"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-8">
+                <ul>
+                    <li><a href="">chuong trinh</a></li>
+                    <li><a href="">chuong trinh</a></li>
+                    <li><a href="">chuong trinh</a></li>
+                </ul>
+            </div>  
+        </div>
+
+        <div id="Contacts" class="row content">
+            <div class="col-md-1 col-lg-4 red left_colum" >
+                <div class="row tree">
+                    <img src="images/tree.jpg" alt="tree picture">
+                </div>
+                <div class="row tree green">
+                    <h4 id="team-img">Team members</h4>
+                    <ul id="cofounder">
+                        <li><img src="images/minhld.png" alt="startup co-founder" title="Minh"></li>
+                        <li><img src="images/tuanvd.png" alt="startup co-founder" title="Tuan"></li>
+                        <li><img src="images/anhnt.png" alt="startup co-founder" title="The Anh"></li>
+                    </ul>
+                    <div id="profile">
+                        <h5 class="white">Liền Kề 13, Ô 21, KDT Văn Phú, Phường Phú La, Quận Hà Đông, Hà Nội</h5>
+                        <p id="phone"> Phone: <span style="color:#177BA5">0422466669</span></p>
+                        <p id="email"> Email: <span style="color:#013E5F">support@antztek.com</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1 col-lg-8" style="padding:0px;">
+                <div id="googleMap" style="width:854px;height:464px;"></div>
+            </div>
+        </div>
+            <div class="col-md-1 col-lg-8">
+                
+            </div>  
+        </div>
+
+    </div>
+
+
+</body>
+</html> 

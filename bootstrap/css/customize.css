@@ -1,0 +1,34 @@
+
+*{
+font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+html {
+height: 100%;
+}
+input::-moz-focus-inner { 
+border: 0; 
+border: 0; 
+}
+body{
+
+/*
+background: url("../../images/background.jpg") #4E4E49 no-repeat;
+background-size: cover;
+background-position: center center; 
+height: 100%;
+padding-top: 130px;
+background-attachment: fixed;
+min-height: 100%;*/
+}
+.red{
+  background: red;
+}
+.green{
+  background: green;
+}
+li{
+  list-style: none;
+}
+#scream{
+  display: none;
+}
