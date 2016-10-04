@@ -8,6 +8,31 @@
   'fileUpload' => true
 ]);
 
+ $data = [
+  'message' => 'My awesome photo upload example.',
+  'source' => $fb->fileToUpload(__DIR__.'/photos/test.jpg'),
+];
+/* Tuan 
+
+*/
+//$access_token =  $fb->getAccessToken();
+
+try {
+  // Returns a `Facebook\FacebookResponse` object
+  $response = $fb->post('/me/photos', $data);
+} catch(Facebook\Exceptions\FacebookResponseException $e) {
+  echo 'Graph returned an error: ' . $e->getMessage();
+  exit;
+} catch(Facebook\Exceptions\FacebookSDKException $e) {
+  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+  exit;
+}
+
+$graphNode = $response->getGraphNode();
+
+echo 'Photo ID: ' . $graphNode['id'];
+
+
         if(isset($_POST['photo']))
         {
             $data = $_POST['photo'];
@@ -69,6 +94,27 @@
             });
 
             // ADD ADDITIONAL FACEBOOK CODE HERE
+            function onLogin(response) {
+              if (response.status == 'connected') {
+                FB.api('/me?fields=first_name', function(data) {
+                  var welcomeBlock = document.getElementById('fb-welcome');
+                  welcomeBlock.innerHTML = 'Hello, ' + data.first_name + '!';
+                });
+              }
+            }
+
+            FB.getLoginStatus(function(response) {
+              // Check login status on load, and if the user is
+              // already logged in, go directly to the welcome message.
+              if (response.status == 'connected') {
+                onLogin(response);
+              } else {
+                // Otherwise, show Login dialog first.
+                FB.login(function(response) {
+                  onLogin(response);
+                }, {scope: 'user_friends, email'});
+              }
+            });
           };
 
           (function(d, s, id){
@@ -94,7 +140,8 @@
                     <li><img src="images/minhld.png" alt="startup co-founder" title="Minh" onclick="myCanvas(this)"></li>
                     <li><img src="images/anhnt.png" alt="startup co-founder" title="The Anh" onclick="myCanvas(this)"></li>
                 </ul>
-                <p><button id="hello" onclick="getID(this)">Make it is Facebook advantar</button></p>
+                <p><button id="hello">Make it is Facebook advantar</button></p>
+                <h1 id="fb-welcome"></h1>
             </div> 
 
         </div>
