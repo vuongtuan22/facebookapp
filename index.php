@@ -8,7 +8,32 @@
   'fileUpload' => true
 ]);
 
- $data = [
+$helper = $fb->getCanvasHelper();
+try {
+  $accessToken = $helper->getAccessToken();
+} catch(Facebook\Exceptions\FacebookResponseException $e) {
+  // When Graph returns an error
+  echo 'Graph returned an error: ' . $e->getMessage();
+  exit;
+} catch(Facebook\Exceptions\FacebookSDKException $e) {
+  // When validation fails or other local issues
+  echo 'Facebook SDK returned an error: ' . $e->getMessage();
+  exit;
+}
+
+if (!isset($accessToken)) {
+  echo '??No OAuth data could be obtained from the signed request. User has not authorized your app yet.';
+  exit;
+}
+
+// Logged in
+echo '<h3>Signed Request</h3>';
+var_dump($helper->getSignedRequest());
+
+echo '<h3>Access Token</h3>';
+var_dump($accessToken->getValue());     
+
+$data = [
   'message' => 'My awesome photo upload example.',
   'source' => $fb->fileToUpload(__DIR__.'/photos/test.jpg'),
 ];
@@ -16,10 +41,9 @@
 
 */
 //$access_token =  $fb->getAccessToken();
-
 try {
   // Returns a `Facebook\FacebookResponse` object
-  $response = $fb->post('/me/photos', $data);
+  $response = $fb->post('/me/photos', $data, $accessToken);
 } catch(Facebook\Exceptions\FacebookResponseException $e) {
   echo 'Graph returned an error: ' . $e->getMessage();
   exit;
