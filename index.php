@@ -97,13 +97,8 @@
                 <p><button id="hello" onclick="getID(this)">Make it is Facebook advantar</button></p>
             </div> 
 
-<<<<<<< HEAD
         </div>
         <div id="Solution" class="row content">   
-=======
-<body>
-<h2>Just photo</h2>
->>>>>>> 362098d74d059e37f0b60c6337b961eceba020ea
 
         </div>
         
